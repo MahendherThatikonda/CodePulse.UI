@@ -10,3 +10,8 @@ export interface Category{
     UrlHandle:string
 
 }
+
+export interface UpdateCategoryRequest{
+    name:string,
+    UrlHandle:string
+}
