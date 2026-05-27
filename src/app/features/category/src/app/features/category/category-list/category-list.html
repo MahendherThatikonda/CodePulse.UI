@@ -20,15 +20,14 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Url Handle</th>
-                    <th></th>
                 </tr></thead>
                 <tbody>
             @for (category of value(); track category.id) {
             <tr>
                 <td>{{category.id}}</td>
-                    <td>{{category.name}}</td>
-                    <td>{{category.UrlHandle}}</td>
-                <td><a class="btn btn-light" [routerLink]="['/admin/category/edit',category.id]">Edit</a></td>
+                                <td>{{category.name}}</td>
+                                                <td>{{category.UrlHandle}}</td>
+                
             </tr>
 }
                 </tbody>

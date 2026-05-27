@@ -1,15 +1,11 @@
 import { Routes } from '@angular/router';
 import { CategoryList } from './features/category/category-list/category-list';
 import { AddCategory } from './features/category/add-category/add-category';
-import { EditCategory } from './features/category/edit-category/edit-category';
 
 export const routes: Routes = [{
     path:'admin/categories',
-    component:CategoryList,
+    component:CategoryList
 },{
     path:'admin/categories/add',
-    component:AddCategory,
-},{
-    path:'admin/category/edit/:id',
-    component:EditCategory,
+    component:AddCategory
 }];
