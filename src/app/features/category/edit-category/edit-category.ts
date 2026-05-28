@@ -40,7 +40,7 @@ categoryResponse=this.categoryResourceref.value;
   {
     name: new FormControl<string>('',{nonNullable:true,
       validators:[Validators.required,Validators.maxLength(100)]  }),
-    UrlHandle: new FormControl<string>('',{nonNullable:true,
+    urlHandle: new FormControl<string>('',{nonNullable:true,
       validators:[Validators.required,Validators.maxLength(100)]}),
   }
 );
@@ -51,12 +51,12 @@ get nameFormControl(){
 }
 
 get UrlHandleFormControl(){
-  return this.editcategoryFormGroup.controls.UrlHandle
+  return this.editcategoryFormGroup.controls.urlHandle
 }
 
 effectRef= effect(()=>{
  this.editcategoryFormGroup.controls.name.patchValue(this.categoryResponse()?.name??'') 
-  this.editcategoryFormGroup.controls.UrlHandle.patchValue(this.categoryResponse()?.UrlHandle??'') 
+  this.editcategoryFormGroup.controls.urlHandle.patchValue(this.categoryResponse()?.urlHandle??'') 
 })
 
 onSubmit(){
@@ -68,7 +68,7 @@ onSubmit(){
   const formRawValue=this.editcategoryFormGroup.getRawValue();
   const updateCategoryRequestDto:UpdateCategoryRequest={
     name:formRawValue.name,
-    UrlHandle:formRawValue.UrlHandle,
+    urlHandle:formRawValue.urlHandle,
   }
 
  this.categoryService.updateCategory(id,updateCategoryRequestDto)

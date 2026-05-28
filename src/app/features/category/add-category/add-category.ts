@@ -31,7 +31,7 @@ private categoryService= inject(CategoryService)
   addcategoryFormGroup=new FormGroup(
   {
     name: new FormControl<string>('',{nonNullable:true,validators:[Validators.required,Validators.maxLength(100)]  }),
-    UrlHandle: new FormControl<string>('',{nonNullable:true,validators:[Validators.required,Validators.maxLength(100)]}),
+    urlHandle: new FormControl<string>('',{nonNullable:true,validators:[Validators.required,Validators.maxLength(100)]}),
   }
 );
 
@@ -41,7 +41,7 @@ get nameFormControl(){
 }
 
 get UrlHandleFormControl(){
-  return this.addcategoryFormGroup.controls.UrlHandle
+  return this.addcategoryFormGroup.controls.urlHandle
 }
 
 onSubmit(){
@@ -49,7 +49,7 @@ onSubmit(){
 
   const addCategoryRequestDto:addCategoryrequest={
     name:addCategoryFormValue.name,
-    UrlHandle:addCategoryFormValue.UrlHandle
+    urlHandle:addCategoryFormValue.urlHandle
   }
 
   this.categoryService.addCategory(addCategoryRequestDto);

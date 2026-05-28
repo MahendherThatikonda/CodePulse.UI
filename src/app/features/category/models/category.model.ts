@@ -1,17 +1,17 @@
 export interface addCategoryrequest{
     name:string,
-    UrlHandle:string
+    urlHandle:string
 }
 
 
 export interface Category{
     id:string,
     name:string,
-    UrlHandle:string
+    urlHandle:string
 
 }
 
 export interface UpdateCategoryRequest{
     name:string,
-    UrlHandle:string
+    urlHandle:string
 }
