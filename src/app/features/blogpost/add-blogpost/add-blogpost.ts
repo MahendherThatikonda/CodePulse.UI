@@ -5,6 +5,7 @@ import { BlogPostService } from '../services/blog-post-service';
 import { AddBlogPostRequest } from '../models/blogpost.model';
 import { Router } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
+import { CategoryService } from '../../category/services/category-service';
 
 @Component({
   selector: 'app-add-blogpost',
@@ -16,7 +17,13 @@ export class AddBlogpost {
 
 
   blogPostService=inject(BlogPostService);
+  categoryService=inject(CategoryService);
   router=inject(Router);
+
+  private categoriesResourceRef= this.categoryService.getAllCategories();
+
+  categoriesResponse=this.categoriesResourceRef.value;
+
   addBlogFormPost=new FormGroup({
     title: new FormControl<string>('This is the a new title',{
       nonNullable:true,
@@ -50,6 +57,9 @@ export class AddBlogpost {
       isVisible: new FormControl<boolean>(true,{
       nonNullable:true
     }),
+    categories:new FormControl<string[]>([],{
+      nonNullable:true,
+    }),
   })
 
 
@@ -64,7 +74,8 @@ export class AddBlogpost {
       featuredImageUrl:formRawValue.featuredImageUrl,
       urlHandle:formRawValue.urlHandle,
       publishedDate:new Date(formRawValue.publishedDate),
-      isVisible:formRawValue.isVisible
+      isVisible:formRawValue.isVisible,
+      categories:formRawValue.categories??[],
 
     }
     this.blogPostService.createBlogPost(requestDto)

@@ -13,8 +13,8 @@ blogPostService=inject(BlogPostService)
 
 getAllBlogPostRef=this.blogPostService.getAllBlogPosts()
 
-isLoading=this.getAllBlogPostRef.isLoading();
-error=this.getAllBlogPostRef.error();
+isLoading=this.getAllBlogPostRef.isLoading;
+error=this.getAllBlogPostRef.error;
 response=this.getAllBlogPostRef.value;
 statusCode=this.getAllBlogPostRef.statusCode;
 }
