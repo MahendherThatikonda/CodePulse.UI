@@ -1,5 +1,5 @@
-import { inject, Injectable } from '@angular/core';
-import { AddBlogPostRequest, BlogPost } from '../models/blogpost.model';
+import { inject, Injectable, InputSignal } from '@angular/core';
+import { AddBlogPostRequest, BlogPost, UpdateBlogPostRequest } from '../models/blogpost.model';
 import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
@@ -17,5 +17,13 @@ export class BlogPostService {
 
   getAllBlogPosts():HttpResourceRef<BlogPost[]|undefined> {
   return  httpResource<BlogPost[]>(()=>`${this.apiBaseUrl}/api/blogposts`)
+  }
+
+  getBlogPostById(id:InputSignal<string | undefined>): HttpResourceRef<BlogPost|undefined>{
+   return httpResource<BlogPost>(()=>'${this.apiBaseUrl}/api/blogposts/${id()}');
+  }
+
+  editBlogPost(id:string,body:UpdateBlogPostRequest):Observable<BlogPost>{
+   return  this.http.put<BlogPost>(`${this.apiBaseUrl}/api/blogposts/${id}`,body)
   }
 }
