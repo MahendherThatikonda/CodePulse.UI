@@ -83,6 +83,15 @@ editBlogFormPost=new FormGroup({
     }
   })
 
+  selectedImageEffectRef = effect(()=>{
+    const selectedImageUrl = this.imageSelectorService.selectedImage();
+    if(selectedImageUrl){
+     this.editBlogFormPost.patchValue({
+      featuredImageUrl:selectedImageUrl,
+     })
+    }
+  })
+
   onSubmit(){
     const id=this.id();
     if(id && this.editBlogFormPost.valid){
