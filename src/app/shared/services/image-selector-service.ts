@@ -1,0 +1,45 @@
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
+import { Observable, single } from 'rxjs';
+import { BlogImage } from '../model/image.model';
+import { environment } from '../../../environments/environment';
+@Injectable({
+  providedIn: 'root',
+})
+export class ImageSelectorService {
+  http=inject(HttpClient)
+  showImageSelector = signal<boolean>(false);
+  //apiBaseUrl='https://localhost:7160/'
+
+  selectedImage=signal<string|null>(null);
+
+  displayImageSelector(){
+   this.showImageSelector.set(true)
+  }
+
+  hideImageSelector(){
+       this.showImageSelector.set(false)
+  }
+
+  uploadImage(file:File,fileName:string,title:string):Observable<BlogImage>{
+    const formData= new FormData();
+    formData.append('file',file)
+    formData.append('fileName',fileName)
+        formData.append('title',title)
+  return this.http.post<BlogImage>(`${environment.apiBaseUrl}/api/images`,formData)
+  }
+
+
+  getAllImages(id:WritableSignal<string|undefined>):HttpResourceRef<BlogImage[]|undefined>{
+   return  httpResource<BlogImage[]>(()=>{
+      id();
+      return `${environment.apiBaseUrl}/api/images`;
+    })
+  }
+
+  selectImage(imageUrl:string){
+  this.selectedImage.set(imageUrl);
+  this.hideImageSelector();
+  }
+
+}
