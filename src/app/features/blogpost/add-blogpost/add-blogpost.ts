@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { BlogPostService } from '../services/blog-post-service';
@@ -6,6 +6,7 @@ import { AddBlogPostRequest } from '../models/blogpost.model';
 import { Router } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
 import { CategoryService } from '../../category/services/category-service';
+import { ImageSelectorService } from '../../../shared/services/image-selector-service';
 
 @Component({
   selector: 'app-add-blogpost',
@@ -19,10 +20,20 @@ export class AddBlogpost {
   blogPostService=inject(BlogPostService);
   categoryService=inject(CategoryService);
   router=inject(Router);
+  imageSelectorService=inject(ImageSelectorService)
 
   private categoriesResourceRef= this.categoryService.getAllCategories();
 
   categoriesResponse=this.categoriesResourceRef.value;
+
+    selectedImageEffectRef = effect(()=>{
+    const selectedImageUrl = this.imageSelectorService.selectedImage();
+    if(selectedImageUrl){
+     this.addBlogFormPost.patchValue({
+      featuredImageUrl:selectedImageUrl,
+     })
+    }
+  })
 
   addBlogFormPost=new FormGroup({
     title: new FormControl<string>('This is the a new title',{

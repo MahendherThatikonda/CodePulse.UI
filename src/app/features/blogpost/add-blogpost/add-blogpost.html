@@ -31,7 +31,12 @@
 
     </div>
     <div class="mb-3">
-      <label class="form-label">Featured Image URL</label>
+      <label class="form-label">Featured Image URL
+                <button class="btn btn-light" type="button" (click)="imageSelectorService.displayImageSelector()">
+          Select Images
+        </button>
+
+      </label>
 
       @if(addBlogFormPost.controls.featuredImageUrl.getRawValue()){
         <div>

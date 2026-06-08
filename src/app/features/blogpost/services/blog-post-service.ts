@@ -23,6 +23,10 @@ export class BlogPostService {
    return httpResource<BlogPost>(()=>'${this.apiBaseUrl}/api/blogposts/${id()}');
   }
 
+  getBlogPostByUrlHanlde(urlHandle:InputSignal<string | undefined>): HttpResourceRef<BlogPost|undefined>{
+  return httpResource<BlogPost>(()=>'${this.apiBaseUrl}/api/blogposts/${id()}');
+  }
+
   editBlogPost(id:string,body:UpdateBlogPostRequest):Observable<BlogPost>{
    return  this.http.put<BlogPost>(`${this.apiBaseUrl}/api/blogposts/${id}`,body)
   }
