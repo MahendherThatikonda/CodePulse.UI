@@ -15,7 +15,9 @@ export class CategoryService {
 
   addCategory(category:addCategoryrequest){
     this.addCategoryStatus.set('loading')
-    this.http.post<void>(`${this.apiBaseUrl}/api/categories`,category)
+    this.http.post<void>(`${this.apiBaseUrl}/api/categories`,category,{
+      withCredentials:true
+    })
     .subscribe({
       next:() =>{
     this.addCategoryStatus.set('sucess')
@@ -38,7 +40,9 @@ export class CategoryService {
 
   updateCategory(id:string,updateCategoryRequestDto:UpdateCategoryRequest){
     this.updateCategoryStatus.set('loading')
-  this.http.put<void>(`${this.apiBaseUrl}/api/category/${id}`,updateCategoryRequestDto)
+  this.http.put<void>(`${this.apiBaseUrl}/api/category/${id}`,updateCategoryRequestDto,{
+    withCredentials:true
+  })
   .subscribe({
     next:()=>{
       this.updateCategoryStatus.set('sucess')
@@ -52,7 +56,9 @@ export class CategoryService {
 
   deleteCategory(id:string):Observable<void>{
 //    const x = this.http.delete(`${this.apiBaseUrl}/api/categories/${id}`)
-return this.http.delete<void>(`${this.apiBaseUrl}/api/categories/${id}`)
+return this.http.delete<void>(`${this.apiBaseUrl}/api/categories/${id}`,{
+  withCredentials:true
+})
   }
 
 }
